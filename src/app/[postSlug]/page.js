@@ -6,16 +6,19 @@ import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
-export function generateMetadata({ params }) {
-  console.log("params", params);
+import { BLOG_TITLE } from "@/constants";
+
+const getBlogPost = React.cache(loadBlogPost);
+
+export async function generateMetadata({ params }) {
+  const post = await getBlogPost(params.postSlug);
   return {
-    title: `${params.title} . Bits and Bytes`,
+    title: `${post.frontmatter.title} • ${BLOG_TITLE}`,
   };
 }
 
 async function BlogPost({ params }) {
-  console.log("params", params);
-  const { frontmatter, content } = await loadBlogPost(params.postSlug);
+  const { frontmatter, content } = await getBlogPost(params.postSlug);
   return (
     <article className={styles.wrapper}>
       <BlogHero
