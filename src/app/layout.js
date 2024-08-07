@@ -2,7 +2,7 @@ import React from "react";
 import { Work_Sans, Spline_Sans_Mono } from "next/font/google";
 import clsx from "clsx";
 
-import { LIGHT_TOKENS, DARK_TOKENS } from "@/constants";
+import { LIGHT_TOKENS, DARK_TOKENS, BLOG_TITLE } from "@/constants";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -22,7 +22,7 @@ const monoFont = Spline_Sans_Mono({
 });
 
 export const metadata = {
-  title: "Bits & Bytes",
+  title: BLOG_TITLE,
   description: "A wonderful blog about JavaScript",
 };
 
