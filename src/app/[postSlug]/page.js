@@ -4,7 +4,7 @@ import BlogHero from "@/components/BlogHero";
 
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
-import { MDXRemote } from "next-mdx-remote";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export function generateMetadata({ params }) {
   console.log("params", params);
@@ -22,7 +22,9 @@ async function BlogPost({ params }) {
         title={frontmatter.title}
         publishedOn={frontmatter.publishedOn}
       />
-      <div className={styles.page}>{/* <MDXRemote source={content} /> */}</div>
+      <div className={styles.page}>
+        <MDXRemote source={content} />
+      </div>
     </article>
   );
 }
