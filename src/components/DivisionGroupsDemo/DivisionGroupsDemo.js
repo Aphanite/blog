@@ -8,6 +8,7 @@ import SliderControl from "@/components/SliderControl";
 
 import Equation from "./Equation";
 import styles from "./DivisionGroupsDemo.module.css";
+import { motion, LayoutGroup } from "framer-motion";
 
 function DivisionGroupsDemo({
   numOfItems = 12,
@@ -32,6 +33,12 @@ function DivisionGroupsDemo({
           gridTemplateRows: "1fr 1fr",
         };
 
+  const SPRING = {
+    type: "spring",
+    stiffness: 200,
+    damping: 40,
+  };
+
   return (
     <Card as="section" className={styles.wrapper}>
       <header className={styles.header}>
@@ -49,11 +56,22 @@ function DivisionGroupsDemo({
       <div className={styles.demoWrapper}>
         <div className={clsx(styles.demoArea)} style={gridStructure}>
           {range(numOfGroups).map((groupIndex) => (
-            <div key={groupIndex} className={styles.group}>
-              {range(numOfItemsPerGroup).map((index) => {
-                return <div key={index} className={styles.item} />;
-              })}
-            </div>
+            <LayoutGroup>
+              <div key={groupIndex} className={styles.group}>
+                {range(numOfItemsPerGroup).map((index) => {
+                  const id = React.useId();
+                  const layoutId = `${id}-${index}`;
+
+                  return (
+                    <motion.div
+                      layoutId={layoutId}
+                      key={layoutId}
+                      className={styles.item}
+                    />
+                  );
+                })}
+              </div>
+            </LayoutGroup>
           ))}
         </div>
       </div>
