@@ -7,6 +7,7 @@ import { loadBlogPost } from "@/helpers/file-helpers";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 import { BLOG_TITLE } from "@/constants";
+import CodeSnippet from "@/components/CodeSnippet";
 
 const getBlogPost = React.cache(loadBlogPost);
 
@@ -26,7 +27,10 @@ async function BlogPost({ params }) {
         publishedOn={frontmatter.publishedOn}
       />
       <div className={styles.page}>
-        <MDXRemote source={content} />
+        <MDXRemote
+          source={content}
+          components={{ pre: (props) => <CodeSnippet {...props} /> }}
+        />
       </div>
     </article>
   );
