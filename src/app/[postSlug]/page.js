@@ -9,6 +9,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { BLOG_TITLE } from "@/constants";
 import CodeSnippet from "@/components/CodeSnippet";
 import DivisionGroupsDemo from "@/components/DivisionGroupsDemo";
+import CircularColorsDemo from "@/components/CircularColorsDemo";
 
 const getBlogPost = React.cache(loadBlogPost);
 
@@ -33,6 +34,7 @@ async function BlogPost({ params }) {
           components={{
             pre: (props) => <CodeSnippet {...props} />,
             DivisionGroupsDemo,
+            CircularColorsDemo,
           }}
         />
       </div>
